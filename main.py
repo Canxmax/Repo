@@ -137,7 +137,7 @@ class ModernCeviriUygulamasi:
 
             # 1. Ses Kaydı
             self.durum_etiketi.configure(
-                text=f"🔴 Mikrofon aktif, konuşun... ({sure} sn)",
+                text=f"Mikrofon aktif, konuşun... ({sure} sn)",
                 text_color="#ff4d4d",
             )
             sample_rate = 44100
@@ -150,7 +150,7 @@ class ModernCeviriUygulamasi:
             sd.wait()
 
             self.durum_etiketi.configure(
-                text="🔍 Ses dalgaları çözümleniyor...", text_color="#ffcc00"
+                text="Ses dalgaları çözümleniyor...", text_color="#ffcc00"
             )
             wav.write(ses_dosyasi, sample_rate, recording)
 
@@ -164,14 +164,14 @@ class ModernCeviriUygulamasi:
                 self.metin_soylenen.insert(cctk.END, text)
             except Exception:
                 self.durum_etiketi.configure(
-                    text="❌ Ses algılanamadı, tekrar deneyin.",
+                    text="Ses algılanamadı, tekrar deneyin.",
                     text_color="#ff4d4d",
                 )
                 return
 
             # 3. Çeviri
             self.durum_etiketi.configure(
-                text="🔄 Yapay zeka çevirisi yapılıyor...", text_color="#ffcc00"
+                text=" Yapay zeka çevirisi yapılıyor...", text_color="#ffcc00"
             )
             translator = Translator()
             translated = translator.translate(text, dest=kod_ceviri)
@@ -179,7 +179,7 @@ class ModernCeviriUygulamasi:
 
             # 4. Seslendirme (Text-to-Speech)
             self.durum_etiketi.configure(
-                text="🔊 Çeviri seslendiriliyor...", text_color="#2db300"
+                text=" Çeviri seslendiriliyor...", text_color="#2db300"
             )
             tts = gTTS(text=translated.text, lang=kod_ceviri, slow=False)
             tts.save(gecici_ses)
@@ -197,7 +197,7 @@ class ModernCeviriUygulamasi:
             pygame.mixer.quit()
 
             self.durum_etiketi.configure(
-                text="✅ Çeviri başarıyla tamamlandı!", text_color="#2db300"
+                text=" Çeviri başarıyla tamamlandı!", text_color="#2db300"
             )
 
         except Exception as e:
@@ -205,7 +205,7 @@ class ModernCeviriUygulamasi:
                 "Hata", f"İşlem sırasında bir hata oluştu:\n{e}"
             )
             self.durum_etiketi.configure(
-                text="❌ Hata nedeniyle durduruldu.", text_color="#ff4d4d"
+                text=" Hata nedeniyle durduruldu.", text_color="#ff4d4d"
             )
         finally:
             # Temizlik ve Butonu Aktif Etme
